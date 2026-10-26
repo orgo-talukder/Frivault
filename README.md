@@ -187,21 +187,6 @@ Frivault/
 └── run_frivault.bat               # Local development launcher
 ```
 
-## Documentation
-
-- [User guide](Frivault_Documentation/user_guide.md)
-- [Product requirements](Frivault_Documentation/PRD.md)
-- [Technical requirements](Frivault_Documentation/TRD.md)
-- [Architecture](Frivault_Documentation/architecture.md)
-- [Backend design](Frivault_Documentation/backend.md)
-- [Frontend design](Frivault_Documentation/frontend.md)
-- [UI/UX specification](Frivault_Documentation/ui_ux_design.md)
-- [Security requirements and threat model](Frivault_Documentation/security.md)
-- [Vault format v1](Frivault_Documentation/vault_format_v1.md)
-- [Testing strategy](Frivault_Documentation/testing.md)
-- [Roadmap and phase status](Frivault_Documentation/roadmap.md)
-- [Release checklist](Frivault_Documentation/release_checklist.md)
-
 ## License
 
 Frivault is distributed under the [MIT License](LICENSE). The project’s bundled dependencies and packaging materials may have separate license terms; see `packaging/licenses/` and the package’s `ThirdPartyLicenses` directory.
