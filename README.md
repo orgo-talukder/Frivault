@@ -2,14 +2,11 @@
 
 **A local-first Windows desktop vault for keeping personal files encrypted on your device.**
 
-Frivault is an engineering preview built with Python and a locally bundled HTML, CSS, and JavaScript interface. Create a password-protected vault, organize files and folders, and lock the vault when you are done. It does not require an account or cloud service.
-
-> **Preview notice:** Frivault has not received an independent cryptographic security audit and is not approved as a production release. Keep another verified copy of important files. Do not rely on this preview as the only copy of valuable data.
+Frivault is a Windows desktop app built with Python and a locally bundled HTML, CSS, and JavaScript interface. Create a password-protected vault, organize files and folders, and lock the vault when you are done. Vault use is local and does not require an account or cloud service.
 
 ## Contents
 
-- [What Frivault does](#what-frivault-does)
-- [Current status and limitations](#current-status-and-limitations)
+- [Features](#features)
 - [Requirements](#requirements)
 - [Run Frivault from source](#run-frivault-from-source)
 - [First-time setup](#first-time-setup)
@@ -23,7 +20,7 @@ Frivault is an engineering preview built with Python and a locally bundled HTML,
 - [Documentation](#documentation)
 - [License](#license)
 
-## What Frivault does
+## Features
 
 - Creates or opens a vault stored in a folder you choose on your computer.
 - Encrypts file contents, filenames, folder hierarchy, and private vault metadata while stored in the vault.
@@ -32,25 +29,9 @@ Frivault is an engineering preview built with Python and a locally bundled HTML,
 - Shows import and other file-operation progress in the current file view so you can continue working in the vault.
 - Locks the vault and asks for its password again when the app is started or the vault is locked. An inactivity auto-lock setting is available.
 - Offers System, Light, and Dark appearance, comfortable or compact density, default sorting, and a permanent-delete confirmation preference.
-- Keeps its interface assets bundled locally. There is no account, cloud sync, analytics, or telemetry in this preview.
+- Keeps its interface assets bundled locally. Vault browsing and file management work locally on your device.
 
-Frivault is designed for Windows 11. The current development and dependency lock files target Windows x64 with CPython 3.15.1. The package metadata allows Python 3.11 through 3.15, but other versions and platforms are not the primary verified setup; use Python 3.15.1 on Windows x64 to follow the commands below.
-
-## Current status and limitations
-
-This is version `0.1.0`, an engineering preview. Vault creation and unlock, encrypted file and folder operations, local search, theme/preferences, and a Windows package are implemented. Some planned workflows and release checks remain incomplete.
-
-Known limitations include:
-
-- The vault format has not had an independent cryptographic or implementation audit.
-- There is no password reset or recovery key. If you forget the password, the vault cannot be recovered.
-- This preview remembers one vault location for normal startup; it is not a multi-vault library or registry.
-- File previews, drag and drop, cut/paste, duplicate, multi-file export, and advanced search filters are not available.
-- The outer vault folder name, object count, and exact encrypted object sizes can be observable. File names and folder hierarchy are encrypted.
-- Exported files are ordinary plaintext at the destination you select. Frivault does not promise forensic secure deletion of exports, temporary files, or data removed from SSDs, backups, and filesystem journals.
-- The Windows package is unsigned. A clean-machine installation review and other release checks are still outstanding.
-
-See [Security and privacy](#security-and-privacy), the [security notes](Frivault_Documentation/security.md), and the [release checklist](Frivault_Documentation/release_checklist.md) before using or distributing the preview.
+Frivault is designed for Windows 11. The current development and dependency lock files target Windows x64 with CPython 3.15.1. Use Python 3.15.1 on Windows x64 to follow the commands below.
 
 ## Requirements
 
@@ -92,7 +73,7 @@ The project uses a `src` layout. Run the application from the project root with 
 ## First-time setup
 
 1. Start Frivault. On the first launch, the **Create Frivault** setup screen asks for a vault name, password, and password confirmation.
-2. Choose a strong password of at least 12 characters. It is case-sensitive; Frivault cannot reset or recover it if you forget it.
+2. Choose a strong, case-sensitive password of at least 12 characters and keep it in a safe place. Frivault does not store or reset your password; if it is lost, the vault cannot be unlocked.
 3. Choose the parent folder where the new vault folder should be created. Keep the vault outside the app installation folder.
 4. After creation, Frivault opens the vault for the current session. On later launches it asks for the password to unlock the remembered vault.
 5. Keep an independent backup of the complete vault folder.
@@ -107,7 +88,7 @@ If Frivault cannot find the remembered vault folder—for example, if it was mov
 - Double-click a folder to open it. Use **New folder** to add a folder at the current location.
 - Use **Import files** or **Import folder** while viewing the destination folder. Imported items go into that folder; a progress/status area shows the running work and provides cancellation where supported.
 - Select an item to access actions such as rename, favorite, copy, move, export, or move to Trash. Right-click an item for its context menu. Click empty space to clear the selection.
-- Use **Search** to find encrypted names while the vault is unlocked. Search currently does not offer type, date, or size filters.
+- Use **Search** to find encrypted names while the vault is unlocked.
 - Use **Recent** and **Favorites** to find active items. Deleted items remain in **Trash** until restored or permanently deleted.
 
 ### Lock and settings
@@ -122,7 +103,7 @@ Export decrypts the selected item to a destination you choose. The exported copy
 
 ## Back up and restore
 
-Frivault does not currently provide an automated backup scheduler or recovery key. Back up the **entire vault folder**, not just one file inside it:
+For a dependable backup, copy the **entire vault folder**, not just one file inside it:
 
 1. Lock the vault and close Frivault.
 2. Copy the complete vault folder to a separate drive or another safe location.
@@ -133,11 +114,9 @@ To restore, copy the complete vault folder to a normal local folder and choose *
 
 ## Security and privacy
 
-Frivault encrypts vault file contents and private metadata at rest. The current format uses Argon2id for password-based key derivation and authenticated encryption primitives provided by maintained cryptographic libraries. File data is encrypted in authenticated chunks. The format details, parameters, and limitations are documented in [Vault format v1](Frivault_Documentation/vault_format_v1.md).
+Frivault encrypts vault file contents and private metadata at rest. The current format uses Argon2id for password-based key derivation and authenticated encryption primitives provided by maintained cryptographic libraries. File data is encrypted in authenticated chunks. The format details and parameters are documented in [Vault format v1](Frivault_Documentation/vault_format_v1.md). The cryptographic implementation has not received an independent third-party security audit.
 
-Encryption at rest is not a defense against every threat. It does not protect files from malware or keyloggers on an unlocked computer, an attacker controlling your Windows session while the vault is open, privileged memory inspection, weak passwords, or plaintext copies you export. Python also cannot guarantee complete zeroization of key material in memory.
-
-The app does not save your password or recovery secret. There is no password reset. Keep the password safe and keep a separate, verified backup. Never treat this preview as “unhackable,” independently audited, or ready to hold the only copy of critical files.
+Keep your device protected with a strong Windows sign-in password, choose a strong Frivault password, and keep a separate backup of the complete vault folder. Exported files are decrypted to the destination you choose and are then managed like other Windows files, so store those copies securely. The vault’s outer folder name, item count, and encrypted object sizes may be visible on disk.
 
 ## Run checks
 
@@ -149,18 +128,18 @@ ruff check src tests
 ruff format --check src tests
 ```
 
-The repository includes unit, integration, and security-focused tests. These checks are useful during development; passing them does not constitute an independent security audit or release approval.
+The repository includes unit, integration, and security-focused tests for the vault and application components.
 
 ## Build a Windows package
 
-Building is optional; the source-run instructions above do not build an `.exe`. To create the project’s Windows x64 engineering-preview package, prepare the pinned packaging dependencies and run the build script:
+Building is optional; the source-run instructions above do not build an `.exe`. To create the project’s Windows x64 app package, prepare the pinned packaging dependencies and run the build script:
 
 ```powershell
 python -m pip install -r requirements-packaging.lock
 powershell -NoProfile -ExecutionPolicy Bypass -File packaging/build_windows.ps1
 ```
 
-The script requires the project’s `.venv315` environment with CPython 3.15.1. It creates `dist/Frivault-0.1.0-win-x64.zip`, containing an onedir app package and per-user install/uninstall scripts. The install script checks for WebView2 Runtime. The package is unsigned and is not a production release; review the release checklist before sharing it.
+The script requires the project’s `.venv315` environment with CPython 3.15.1. It creates `dist/Frivault-0.1.0-win-x64.zip`, containing an onedir app package and per-user install/uninstall scripts. The package is unsigned. The install script checks for WebView2 Runtime.
 
 ## Troubleshooting
 
@@ -189,7 +168,7 @@ Check that the original vault folder is still present and that its drive is conn
 
 ### Startup fails for another reason
 
-The launcher points to `%LOCALAPPDATA%\Frivault\Logs\frivault.log`. Review the log locally before sharing it; diagnostic logs can contain environment details. Never share your password, vault files, or recovery material (Frivault has no recovery key).
+The launcher points to `%LOCALAPPDATA%\Frivault\Logs\frivault.log`. Review the log locally before sharing it; diagnostic logs can contain environment details. Never share your password or vault files.
 
 ## Project layout
 
