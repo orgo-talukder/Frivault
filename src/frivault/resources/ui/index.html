@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Frivault</title>
+    <link rel="icon" href="/assets/frivault_icon.ico">
+    <link rel="stylesheet" href="/css/app.css">
+    <script src="/js/app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <div class="brand">
+          <img class="brand__icon" src="/assets/frivault_icon.ico" alt="">
+          <span class="brand__name">Frivault</span>
+          <button class="sidebar__toggle" id="sidebar-toggle" type="button"
+            aria-label="Collapse sidebar" aria-expanded="true" title="Collapse sidebar">
+            <span class="sidebar__toggle-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <nav class="navigation" id="navigation" aria-label="Workspace"></nav>
+
+        <div class="sidebar__footer">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="vault-state">No vault open</span>
+          <span class="sidebar__version" id="app-version">—</span>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <div class="eyebrow">LOCAL · PRIVATE · OFFLINE FIRST</div>
+            <h1 id="page-title">Set up Frivault</h1>
+          </div>
+          <div class="topbar__tools">
+            <form class="quick-search" id="quick-search-form" role="search">
+              <span class="quick-search__icon" aria-hidden="true"></span>
+              <input name="query" type="search" placeholder="Search this vault" aria-label="Search this vault" disabled>
+              <kbd>Enter</kbd>
+            </form>
+            <div class="connection-state" id="connection-state" role="status">
+              <span class="connection-state__dot" aria-hidden="true"></span>
+              <span>Starting desktop shell…</span>
+            </div>
+          </div>
+        </header>
+
+        <section id="page-content" aria-live="polite"></section>
+      </main>
+    </div>
+    <dialog id="modal" class="modal"><form id="modal-form" method="dialog"></form></dialog>
+    <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-dialog-title">
+      <header class="settings-dialog__header">
+        <div><div class="eyebrow">FRIVAULT PREFERENCES</div><h2 id="settings-dialog-title">Settings</h2></div>
+        <button class="settings-dialog__close" type="button" data-action="close-settings" aria-label="Close settings" title="Close settings"><span class="settings-dialog__close-icon" aria-hidden="true"></span></button>
+      </header>
+      <div class="settings-dialog__body">
+        <nav class="settings-nav" aria-label="Settings sections">
+          <button class="settings-nav__item settings-nav__item--active" type="button" data-settings-category="appearance"><span class="settings-nav__icon settings-nav__icon--appearance" aria-hidden="true"></span>Appearance</button>
+          <button class="settings-nav__item" type="button" data-settings-category="security"><span class="settings-nav__icon settings-nav__icon--security" aria-hidden="true"></span>Security</button>
+          <button class="settings-nav__item" type="button" data-settings-category="files"><span class="settings-nav__icon settings-nav__icon--files" aria-hidden="true"></span>File preferences</button>
+          <button class="settings-nav__item" type="button" data-settings-category="privacy"><span class="settings-nav__icon settings-nav__icon--privacy" aria-hidden="true"></span>Privacy &amp; backup</button>
+          <button class="settings-nav__item" type="button" data-settings-category="about"><span class="settings-nav__icon settings-nav__icon--about" aria-hidden="true"></span>About Frivault</button>
+        </nav>
+        <div class="settings-dialog__content" id="settings-dialog-content"></div>
+      </div>
+      <footer class="settings-dialog__footer" id="settings-dialog-footer">
+        <span id="settings-save-note">Preferences are stored on this device.</span>
+        <button class="button" type="submit" form="settings-form" id="settings-save">Save preferences</button>
+      </footer>
+    </dialog>
+    <div id="item-context-menu" class="item-context-menu" role="menu" aria-label="Item actions" hidden></div>
+    <dialog id="confirm-delete-dialog" class="confirm-delete" role="alertdialog" aria-labelledby="confirm-delete-title" aria-describedby="confirm-delete-description">
+      <div class="confirm-delete__heading">
+        <div class="confirm-delete__icon" aria-hidden="true"><span class="confirm-delete__icon-glyph"></span></div>
+        <div><div class="confirm-delete__eyebrow">PERMANENT ACTION</div><h2 id="confirm-delete-title">Delete permanently?</h2></div>
+      </div>
+      <p class="confirm-delete__description" id="confirm-delete-description"></p>
+      <ul class="confirm-delete__items" id="confirm-delete-items" aria-label="Items to delete"></ul>
+      <div class="confirm-delete__warning"><strong>This action cannot be undone.</strong><span>These items will not be recoverable from Trash after deletion.</span></div>
+      <div class="confirm-delete__actions">
+        <button class="button button--quiet" type="button" id="confirm-delete-cancel">Cancel</button>
+        <button class="button button--danger" type="button" id="confirm-delete-accept">Delete permanently</button>
+      </div>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <noscript>This local Frivault screen requires JavaScript to display desktop status.</noscript>
+  </body>
+</html>

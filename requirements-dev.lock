@@ -1,0 +1,2 @@
+# Development tools for Windows x64 CPython 3.15.1.
+ruff==0.16.8

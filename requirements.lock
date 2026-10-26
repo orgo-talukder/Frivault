@@ -1,0 +1,15 @@
+# Resolved on Windows x64 with CPython 3.15.1.
+# Rebuild and review this lock deliberately when dependencies are updated.
+argon2-cffi==25.1.0
+argon2-cffi-bindings==26.1.0
+bottle==0.13.4
+cffi==2.1.1
+cryptography==50.0.1
+clr_loader==0.3.1
+PyNaCl==1.6.2
+platformdirs==4.11.10
+proxy_tools==0.1.0
+pycparser==3.12
+pythonnet==3.2.1
+pywebview==6.2.1
+typing_extensions==4.16.0
